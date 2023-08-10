@@ -32,10 +32,20 @@ def getRowHints(row):
     return hint
 
 def printMap(map):
-    height = len(map)
-    maxColumnHint = math.ceil(height/2)
+
+    # variaveis
     width = len(map[1])
     maxRowHint = math.ceil(width/2)
+    height = len(map)
+    columnHints = []
+    maxColumnHint = math.ceil(height/2)
+    space = "  " * (maxRowHint+1)
+
+    # pegar dicas verticais
+    for i in len(map[1]):
+        columnHints.append(getRowHints(map))
+
+    # prints horizontal
     for row in map:
         rowHint = getRowHints(row)
         rowHintStr = ""
