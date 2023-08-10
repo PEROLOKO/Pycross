@@ -1,5 +1,6 @@
 
 import random
+import math
 
 def generateMap(width,height):
     map = []
@@ -30,13 +31,35 @@ def getRowHints(row):
             num = 0
     return hint
 
+def printMap(map):
+    height = len(map)
+    maxColumnHint = math.ceil(height/2)
+    width = len(map[1])
+    maxRowHint = math.ceil(width/2)
+    for row in map:
+        rowHint = getRowHints(row)
+        rowHintStr = ""
+        rowStr = ""
+
+        # printa as dicas
+        for i in range(maxRowHint):
+            if i > len(rowHint)-1:
+                rowHintStr += "  "
+            else:
+                rowHintStr += f"{rowHint[i]} "
+            
+        # printa a linha
+        for i in row:
+            rowStr += f"[{i}]"
+        print(f"{rowHintStr}: {rowStr}")
+        
+
 width = 8
 height = 5
 map = generateMap(width,height)
 
-for i in map:
-    print(f'{getRowHints(i)} - {i}')
+printMap(map)
 
-for i in range(width):
-    column = getColumn(map,i)
-    print(f'{column} - {getRowHints(column)}')
+#for i in range(width):
+#    column = getColumn(map,i)
+#    print(f'{column} - {getRowHints(column)}')
